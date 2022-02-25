@@ -1,0 +1,67 @@
+.todo-item {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #545454;
+  border-radius: 6px;
+  width: 100%;
+  margin: 0 auto 14px;
+  position: relative;
+}
+
+.todo-item--completed {
+  background: rgba(255, 255, 255, 0.21);
+  border-color: #545454;
+}
+
+.todo-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #545454;
+  box-sizing: border-box;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 0;
+  transform: rotate(180deg);
+}
+
+.todo-text {
+  margin-left: 10px;
+}
+
+.todo-text--completed {
+  text-decoration: line-through;
+}
+
+.todo-check:hover {
+  background: #30218A;
+  color: #fff;
+}
+
+.check--checked {
+  background: #30218A;
+  color: #fff;
+}
+
+.todo-delete {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  transform: rotate(180deg);
+}
+.todo-delete:hover {
+  border-radius: 3px;
+  background: red;
+  color: #fff;
+}
