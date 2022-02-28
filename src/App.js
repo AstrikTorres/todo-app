@@ -33,6 +33,20 @@ function App() {
     })
   }
 
+  const toggleCompleteTodo = (text) => {
+    const todoIndex = todos.findIndex(todo => todo.text === text);
+    const newTodos = [...todos];
+    newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
+    setTodos(newTodos);
+  };
+
+  const deleteTodo = (text) => {
+    const todoIndex = todos.findIndex(todo => todo.text === text);
+    const newTodos = [...todos];
+    newTodos.splice(todoIndex, 1);
+    setTodos(newTodos);
+  };
+
   return (
     <React.Fragment>
       <TittleApp/>
@@ -53,6 +67,8 @@ function App() {
               completed={todo.completed}
               key={todo.text}
               text={todo.text}
+              onComplete={() => toggleCompleteTodo(todo.text)}
+              onDelete={() => deleteTodo(todo.text)}
             />
           ))}
       </TodoList>

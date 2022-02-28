@@ -2,13 +2,6 @@ import React from "react";
 import "./TodoItem.css";
 
 function TodoItem(props) {
-  const onComplete = () => {
-    alert('Completaste el todo ' + props.text)
-  }
-
-  const onDelete = () => {
-    alert('Borraste el todo ' + props.text)
-  }
 
   return (
     <li
@@ -16,14 +9,14 @@ function TodoItem(props) {
     >
       <span
         className={`todo-check ${props.completed && 'check--checked'}`}
-        onClick={onComplete}
+        onClick={props.onComplete}
       >
         ᄼ
       </span>
       <p className={`todo-text ${props.completed && 'todo-text--completed'}`}>{props.text}</p>
       <span
         className="todo-delete"
-        onClick={onDelete}
+        onClick={props.onDelete}
       >
         X
       </span>
