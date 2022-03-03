@@ -7,12 +7,12 @@ function CreateTodoButton() {
   };
 
   return (
-    <a
+    <button
       className="button"
       onClick={() => {onClickButton('My msg')}}
     >
       Add todo
-    </a>
+    </button>
   );
 }
 
