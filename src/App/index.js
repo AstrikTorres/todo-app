@@ -12,8 +12,8 @@ function App() {
   let parsedTodos;
 
   if (!localStorageTodos) {
-    localStorage.setItem('TODOS_V1', "[]");
-    parsedTodos = [];
+    localStorage.setItem('TODOS_V1', JSON.stringify(defaultTodos));
+    parsedTodos = defaultTodos;
   } else {
     parsedTodos = JSON.parse(localStorageTodos)
   }
