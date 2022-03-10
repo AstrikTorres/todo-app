@@ -6,7 +6,9 @@ import { TodoItem } from '../TodoItem';
 import { TodoList } from '../TodoList'
 import { TittleApp } from '../TittleApp'
 
-function AppUI({ 
+function AppUI({
+  loading,
+  error,
   totalTodos,
   completedTodos,
   searchValue,
@@ -30,7 +32,11 @@ function AppUI({
       />
 
       <TodoList>
-          {searchedTodos.map(todo => (
+        {error && <p>Failed to load</p>}
+        {loading && <p>Loading...</p>}
+        {(!loading && !searchedTodos.length) && <p>Create a TODO!</p>}
+        {(!loading && !error) &&
+          searchedTodos.map(todo => (
             <TodoItem
               completed={todo.completed}
               key={todo.text}
@@ -38,7 +44,8 @@ function AppUI({
               onComplete={() => toggleCompleteTodo(todo.text)}
               onDelete={() => deleteTodo(todo.text)}
             />
-          ))}
+          ))
+        }
       </TodoList>
 
       <CreateTodoButton/>
