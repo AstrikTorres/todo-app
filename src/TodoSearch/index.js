@@ -1,4 +1,5 @@
 import React from "react";
+import { TodoContext } from "../TodoContext";
 
 const inputWrapper = {
   position: "relative",
@@ -26,7 +27,8 @@ const inputIcon = {
   Transform: "translateY(-50%)",
 };
 
-function TodoSearch({ searchValue, setSearchValue }) {
+function TodoSearch() {
+  const { searchValue, setSearchValue } = React.useContext(TodoContext);
 
   const onSearchValueChange = (event) => {
     setSearchValue(event.target.value);

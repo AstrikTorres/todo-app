@@ -8,6 +8,14 @@ import { TodoList } from '../TodoList'
 import { TittleApp } from '../TittleApp'
 
 function AppUI() {
+  const { 
+    error, 
+    loading, 
+    searchedTodos, 
+    toggleCompleteTodo, 
+    deleteTodo
+  } = React.useContext(TodoContext);
+
   return (
     <React.Fragment>
       <TittleApp/>
@@ -16,26 +24,22 @@ function AppUI() {
 
       <TodoSearch/>
 
-      <TodoContext.Consumer>
-        {({ error, loading, searchedTodos, toggleCompleteTodo, deleteTodo}) => (
-          <TodoList>
-            {error && <p className="msg">Failed to load</p>}
-            {loading && <p className="msg">Loading...</p>}
-            {(!loading && !searchedTodos.length) && <p className="msg">Create a TODO!</p>}
-            {(!loading && !error) &&
-              searchedTodos.map(todo => (
-                <TodoItem
-                  completed={todo.completed}
-                  key={todo.text}
-                  text={todo.text}
-                  onComplete={() => toggleCompleteTodo(todo.text)}
-                  onDelete={() => deleteTodo(todo.text)}
-                />
-              ))
-            }
-          </TodoList>
-        )}
-      </TodoContext.Consumer>
+      <TodoList>
+        {error && <p className="msg">Failed to load</p>}
+        {loading && <p className="msg">Loading...</p>}
+        {(!loading && !searchedTodos.length) && <p className="msg">Create a TODO!</p>}
+        {(!loading && !error) &&
+          searchedTodos.map(todo => (
+            <TodoItem
+              completed={todo.completed}
+              key={todo.text}
+              text={todo.text}
+              onComplete={() => toggleCompleteTodo(todo.text)}
+              onDelete={() => deleteTodo(todo.text)}
+            />
+          ))
+        }
+      </TodoList>
 
       <CreateTodoButton/>
 
