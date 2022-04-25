@@ -3,9 +3,16 @@ import { TodoContext } from "../TodoContext";
 import './TodoCounter.css'; 
 
 function TodoCounter() {
-  const {totalTodos, completedTodos} = React.useContext(TodoContext);
+  const {
+    totalTodos, 
+    completedTodos,     
+    error, 
+    loading, 
+    searchedTodos, 
+  } = React.useContext(TodoContext);
+
   return (
-    <p className="TodoCounter">Completed {completedTodos} to {totalTodos}</p>
+    (!error && !loading && searchedTodos.length) && <p className="TodoCounter">Completed {completedTodos} to {totalTodos}</p>
   );
 }
 

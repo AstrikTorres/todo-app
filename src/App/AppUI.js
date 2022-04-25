@@ -8,6 +8,9 @@ import { TodoList } from '../TodoList'
 import { TittleApp } from '../TittleApp'
 import { Modal } from '../Modal';
 import { TodoForm } from '../TodoForm';
+import { TodosError } from "../loadingSkeleton/TodosError";
+import { TodosLoading } from "../loadingSkeleton/TodosLoading";
+import { EmptyTodos } from "../loadingSkeleton/EmptyTodos";
 
 function AppUI() {
   const { 
@@ -29,9 +32,13 @@ function AppUI() {
       <TodoSearch/>
 
       <TodoList>
-        {error && <p className="msg">Failed to load</p>}
-        {loading && <p className="msg">Loading...</p>}
-        {(!loading && !searchedTodos.length) && <p className="msg">Create a TODO!</p>}
+        {error && <TodosError/>}
+        {loading && 
+          new Array(4).fill().map((item, index)=>(
+            <TodosLoading key={index} />
+          ))
+        }
+        {(!loading && !searchedTodos.length) && <EmptyTodos/>}
         {(!loading && !error) &&
           searchedTodos.map(todo => (
             <TodoItem
