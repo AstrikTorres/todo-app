@@ -52,6 +52,8 @@ function AppUI() {
 
       <CreateTodoButton
         setOpenModal={setOpenModal}
+        whidth="100%"
+        height="42px"
       />
 
     </React.Fragment>

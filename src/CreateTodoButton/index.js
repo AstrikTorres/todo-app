@@ -10,6 +10,10 @@ function CreateTodoButton(props) {
     <button
       className="button"
       onClick={onClickButton}
+      style={{
+        width: props.whidth,
+        height: props.height,
+      }}
     >
       Add todo
     </button>
