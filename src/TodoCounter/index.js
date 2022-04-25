@@ -12,7 +12,7 @@ function TodoCounter() {
   } = React.useContext(TodoContext);
 
   return (
-    (!error && !loading && !searchedTodos.length) && <p className="TodoCounter">Completed {completedTodos} to {totalTodos}</p>
+    (!error && !loading) && <p className="TodoCounter">Completed {completedTodos} to {totalTodos}</p>
   );
 }
 
