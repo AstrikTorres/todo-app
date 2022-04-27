@@ -51,6 +51,16 @@ function TodoProvider(props) {
     saveTodos(newTodos);
   };
 
+  const deleteCompletedTodos = () => {
+    const completedTodosArr = todos.filter(todo => !!todo.completed);
+    const newTodos = [...todos];
+    completedTodosArr.forEach(todo => {
+      const todoIndex = newTodos.findIndex(t => t.text === todo.text);
+      newTodos.splice(todoIndex, 1);
+    });
+    saveTodos(newTodos);
+  }
+
   return (
     <TodoContext.Provider value={{
       loading,
@@ -63,8 +73,10 @@ function TodoProvider(props) {
       toggleCompleteTodo,
       addTodo,
       deleteTodo,
+      deleteCompletedTodos,
       openModal,
       setOpenModal,
+      todos
     }}>
       {props.children}
     </TodoContext.Provider>
