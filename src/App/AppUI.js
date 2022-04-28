@@ -12,6 +12,7 @@ import { TodosError } from "../loadingSkeleton/TodosError";
 import { TodosLoading } from "../loadingSkeleton/TodosLoading";
 import { EmptyTodos } from "../loadingSkeleton/EmptyTodos";
 import { DeleteCompletedButton } from "../DeleteCompletedButton";
+import { EditTodo } from "../EditTodo";
 
 function AppUI() {
   const { 
@@ -22,6 +23,7 @@ function AppUI() {
     deleteTodo,
     openModal,
     setOpenModal,
+    openModalEdit,
   } = React.useContext(TodoContext);
 
   return (
@@ -56,6 +58,12 @@ function AppUI() {
       {!!openModal && (
         <Modal>
           <TodoForm></TodoForm>
+        </Modal>
+      )}
+
+      {!!openModalEdit && (
+        <Modal>
+          <EditTodo></EditTodo>
         </Modal>
       )}
 
