@@ -17,13 +17,18 @@ function TodoForm() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addTodo(newTodoValue);
-    onOut();
+    if (!newTodoValue.length) {
+      // Print errror message in the id='label'
+      document.getElementById('label').innerHTML = 'Please write something';
+    } else {
+      addTodo(newTodoValue);
+      onOut();
+    }
   };
 
   return (
     <form onSubmit={onSubmit}>
-      <label>Write your new TODO</label>
+      <label id='label'>Write your new TODO</label>
       <textarea
         value={newTodoValue}
         onChange={e => setNewTodoValue(e.target.value)}

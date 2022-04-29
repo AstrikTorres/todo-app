@@ -16,13 +16,18 @@ function EditTodo() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    editTodo(todoValue, newTodoValue);
-    onOut();
+    if (!newTodoValue.length) {
+      // Print errror message in the id='label'
+      document.getElementById('label').innerHTML = 'Please write something';
+    } else {
+      editTodo(todoValue, newTodoValue);
+      onOut();
+    }
   };
 
   return (
     <form onSubmit={onSubmit}>
-      <label>Edit</label>
+      <label id="label">Edit</label>
       <textarea
         defaultValue={todoValue}
         onChange={e => setNewTodoValue(e.target.value)}

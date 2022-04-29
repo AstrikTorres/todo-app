@@ -41,16 +41,24 @@ function TodoProvider(props) {
   };
 
   const addTodo = (text) => {
-    const newTodos = [...todos];
-    newTodos.push({ text, completed: false });
-    saveTodos(newTodos);
+    if (!text.length) {
+      return;
+    } else {
+      const newTodos = [...todos];
+      newTodos.push({ text, completed: false });
+      saveTodos(newTodos);
+    }
   };
 
   const editTodo = (text, newText) => {
-    const newTodos = [...todos];
-    const todoIndex = newTodos.findIndex(todo => todo.text === text);
-    newTodos[todoIndex].text = newText;
-    saveTodos(newTodos);
+    if (!newText.length) {
+      return;
+    } else {
+      const newTodos = [...todos];
+      const todoIndex = newTodos.findIndex(todo => todo.text === text);
+      newTodos[todoIndex].text = newText;
+      saveTodos(newTodos);
+    }
   };
 
   const deleteTodo = (text) => {
