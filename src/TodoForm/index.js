@@ -9,6 +9,7 @@ function TodoForm() {
     openModal,
     setOpenModal,
     addTodo,
+    verifyTodoDuplied,
   } = React.useContext(TodoContext);
 
   const onOut = () => {
@@ -17,9 +18,10 @@ function TodoForm() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (!newTodoValue.length) {
-      // Print errror message in the id='label'
+    if (!newTodoValue.trim().length) {
       document.getElementById('label').innerHTML = 'Please write something';
+    } else if (verifyTodoDuplied(newTodoValue)) {
+      document.getElementById('label').innerHTML = 'This todo already exists';
     } else {
       addTodo(newTodoValue);
       onOut();

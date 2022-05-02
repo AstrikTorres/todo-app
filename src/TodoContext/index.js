@@ -33,6 +33,15 @@ function TodoProvider(props) {
     })
   }
 
+  const verifyTodoDuplied = (text) => {
+    text = text.trim();
+    const newTodos = [...todos];
+    if (newTodos.find(todo => todo.text === text)) {
+      return true;
+    }
+    return false;
+  }
+
   const toggleCompleteTodo = (text) => {
     const todoIndex = todos.findIndex(todo => todo.text === text);
     const newTodos = [...todos];
@@ -41,9 +50,10 @@ function TodoProvider(props) {
   };
 
   const addTodo = (text) => {
-    if (!text.length) {
+    if (!text.length || verifyTodoDuplied(text)) {
       return;
     } else {
+      text = text.trim();
       const newTodos = [...todos];
       newTodos.push({ text, completed: false });
       saveTodos(newTodos);
@@ -51,9 +61,10 @@ function TodoProvider(props) {
   };
 
   const editTodo = (text, newText) => {
-    if (!newText.length) {
+    if (!newText.length || verifyTodoDuplied(text)) {
       return;
     } else {
+      text = text.trim();
       const newTodos = [...todos];
       const todoIndex = newTodos.findIndex(todo => todo.text === text);
       newTodos[todoIndex].text = newText;
@@ -98,6 +109,7 @@ function TodoProvider(props) {
       setOpenModalEdit,
       todoValue,
       setTodoValue,
+      verifyTodoDuplied
     }}>
       {props.children}
     </TodoContext.Provider>

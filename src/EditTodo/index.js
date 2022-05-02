@@ -5,7 +5,8 @@ function EditTodo() {
   const {
     setOpenModalEdit,
     todoValue,
-    editTodo
+    editTodo,
+    verifyTodoDuplied,
   } = React.useContext(TodoContext);
 
   const [newTodoValue, setNewTodoValue] = React.useState('');
@@ -16,9 +17,11 @@ function EditTodo() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (!newTodoValue.length) {
+    if (!newTodoValue.trim().length) {
       // Print errror message in the id='label'
       document.getElementById('label').innerHTML = 'Please write something';
+    } else if (verifyTodoDuplied(newTodoValue)) {
+      document.getElementById('label').innerHTML = 'This todo already exists';
     } else {
       editTodo(todoValue, newTodoValue);
       onOut();
