@@ -85,12 +85,12 @@ function TodoProvider(props) {
   };
 
   const editTodo = (text, newText) => {
-    if (!newText.length || verifyTodoDuplied(text)) {
+    if (!newText.length || verifyTodoDuplied(newText)) {
       return;
     } else {
       text = text.trim();
       const newTodos = [...todos];
-      const todoIndex = newTodos.findIndex(todo => todo.text === text);
+      const todoIndex = newTodos.findIndex(todo => todo.text == text);
       newTodos[todoIndex].text = newText;
       saveTodos(newTodos);
     }

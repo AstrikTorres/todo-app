@@ -1,17 +1,7 @@
 import React from 'react';
 import { TodoContext } from '../TodoContext';
 
-function Login() {
-  const {
-    setOpenModalLogin,
-		setIsLoged,
-		saveToken,
-	} = React.useContext(TodoContext);
-
-  const onOut = () => {
-    setOpenModalLogin(prevState => !prevState);
-  };
-  
+function Login({  setOpenModalLogin, setIsLoged, saveToken}) {
   const form = React.useRef(null);
 
 	const handleSubmit = (e) => {

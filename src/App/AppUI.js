@@ -16,27 +16,47 @@ import { EditTodo } from "../EditTodo";
 import { Login } from "../Login";
 
 function AppUI() {
-  const { 
-    error, 
+  const {
+    error,
     loading,
     loadingToken,
     errorToken,
-    searchedTodos, 
-    toggleCompleteTodo, 
+    searchedTodos,
+    toggleCompleteTodo,
     deleteTodo,
     openModal,
     setOpenModal,
     openModalEdit,
     openModalLogin,
+    totalTodos,
+    completedTodos,
+    searchValue,
+    setSearchValue,
+    setOpenModalLogin,
+    setIsLoged,
+    isLoged,
+    saveToken,
+    addTodo,
+    verifyTodoDuplied,
+    setOpenModalEdit,
+    editTodo,
+    todoValue,
+    setTodoValue,
   } = React.useContext(TodoContext);
 
   return (
     <React.Fragment>
       <TittleApp/>
 
-      <TodoCounter/>
+      <TodoCounter
+        totalTodos={totalTodos}
+        completedTodos={completedTodos}
+      />
 
-      <TodoSearch/>
+      <TodoSearch
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
 
       <TodoList>
         {error && <TodosError/>}
@@ -52,6 +72,8 @@ function AppUI() {
               completed={todo.completed}
               key={todo.text}
               text={todo.text}
+              setTodoValue={setTodoValue}
+              setOpenModalEdit={setOpenModalEdit}
               onComplete={() => toggleCompleteTodo(todo.text)}
               onDelete={() => deleteTodo(todo.text)}
             />
@@ -61,19 +83,32 @@ function AppUI() {
 
       {!!openModal && (
         <Modal>
-          <TodoForm></TodoForm>
+          <TodoForm
+            setOpenModal={setOpenModal}
+            addTodo={addTodo}
+            verifyTodoDuplied={verifyTodoDuplied}
+          />
         </Modal>
       )}
 
       {!!openModalEdit && (
         <Modal>
-          <EditTodo></EditTodo>
+          <EditTodo
+            setOpenModalEdit={setOpenModalEdit}
+            editTodo={editTodo}
+            todoValue={todoValue}
+            verifyTodoDuplied={verifyTodoDuplied}
+          />
         </Modal>
       )}
 
-      {!!openModalLogin && (
+      {(!!openModalLogin && !isLoged) && (
         <Modal>
-          <Login></Login>
+          <Login
+            setOpenModalLogin={setOpenModalLogin}
+            setIslogged={setIsLoged}
+            saveToken={saveToken}
+          />
         </Modal>
       )}
 

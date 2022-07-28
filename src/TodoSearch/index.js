@@ -27,8 +27,7 @@ const inputIcon = {
   Transform: "translateY(-50%)",
 };
 
-function TodoSearch() {
-  const { searchValue, setSearchValue } = React.useContext(TodoContext);
+function TodoSearch({ searchValue, setSearchValue }) {
 
   const onSearchValueChange = (event) => {
     setSearchValue(event.target.value);

@@ -1,14 +1,7 @@
 import React from "react";
 import { TodoContext } from "../TodoContext";
 
-function EditTodo() {
-  const {
-    setOpenModalEdit,
-    todoValue,
-    editTodo,
-    verifyTodoDuplied,
-  } = React.useContext(TodoContext);
-
+function EditTodo({ setOpenModalEdit, todoValue, editTodo, verifyTodoDuplied }) {
   const [newTodoValue, setNewTodoValue] = React.useState('');
 
   const onOut = () => {
@@ -29,7 +22,7 @@ function EditTodo() {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={(e) => onSubmit(e)}>
       <label id="label">Edit</label>
       <textarea
         defaultValue={todoValue}

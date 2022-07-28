@@ -2,15 +2,8 @@ import React from 'react';
 import { TodoContext } from "../TodoContext";
 import './TodoForm.css';
 
-function TodoForm() {
+function TodoForm({ setOpenModal, addTodo, verifyTodoDuplied }) {
   const [newTodoValue, setNewTodoValue] = React.useState('');
-
-  const { 
-    openModal,
-    setOpenModal,
-    addTodo,
-    verifyTodoDuplied,
-  } = React.useContext(TodoContext);
 
   const onOut = () => {
     setOpenModal(prevState => !prevState);

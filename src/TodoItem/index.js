@@ -7,11 +7,6 @@ import { TiDelete } from "react-icons/ti";
 import { MdEdit } from "react-icons/md";
 
 function TodoItem(props) {
-  const { 
-    setOpenModalEdit,
-    setTodoValue,
-  } = React.useContext(TodoContext);
-
   return (
     <li
       className={ `todo-item ${ props.completed && 'todo-item--completed' }` }
@@ -42,8 +37,8 @@ function TodoItem(props) {
           size="25px"
           className="options-icon"
           onClick={() => {
-            setTodoValue(props.text);
-            setOpenModalEdit(true);
+            props.setTodoValue(props.text);
+            props.setOpenModalEdit(true);
           }}
         />
         <TiDelete
