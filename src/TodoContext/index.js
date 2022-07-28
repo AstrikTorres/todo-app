@@ -11,11 +11,35 @@ const TodoContext = React.createContext();
 
 function TodoProvider(props) {
   const {item: todos, saveItem: saveTodos, loading, error} = useLocalStorage('TODOS_V1', defaultTodos);
+  const { item: token, saveItem: saveToken, loading: loadingToken, error: errorToken } = useLocalStorage('token', "");
+  const { item: isLoged, saveItem: setIsLoged } = useLocalStorage('isLoged', false);
 
   const [searchValue, setSearchValue] = React.useState('');
   const [openModal, setOpenModal] = React.useState(false);
   const [openModalEdit, setOpenModalEdit] = React.useState(false);
   const [todoValue, setTodoValue] = React.useState('');
+
+  const getAuth = () => {
+    fetch('http://localhost:8080/api/users/auth', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      }
+    }).then(response => response.status)
+      .then(status => {
+        if (status === 200) {
+          setIsLoged(true);
+        }
+      }
+    )
+  }
+
+  if (token && !isLoged) {
+    getAuth();
+  }
+
+  const [openModalLogin, setOpenModalLogin] = React.useState(!isLoged);
 
   const completedTodos = todos.filter(todo => !!todo.completed).length;
   const totalTodos = todos.length;
@@ -109,7 +133,16 @@ function TodoProvider(props) {
       setOpenModalEdit,
       todoValue,
       setTodoValue,
-      verifyTodoDuplied
+      verifyTodoDuplied,
+      openModalLogin,
+      setOpenModalLogin,
+      isLoged,
+      setIsLoged,
+      token,
+      saveToken,
+      loadingToken,
+      errorToken,
+      getAuth
     }}>
       {props.children}
     </TodoContext.Provider>

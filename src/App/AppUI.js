@@ -13,17 +13,21 @@ import { TodosLoading } from "../loadingSkeleton/TodosLoading";
 import { EmptyTodos } from "../loadingSkeleton/EmptyTodos";
 import { DeleteCompletedButton } from "../DeleteCompletedButton";
 import { EditTodo } from "../EditTodo";
+import { Login } from "../Login";
 
 function AppUI() {
   const { 
     error, 
-    loading, 
+    loading,
+    loadingToken,
+    errorToken,
     searchedTodos, 
     toggleCompleteTodo, 
     deleteTodo,
     openModal,
     setOpenModal,
     openModalEdit,
+    openModalLogin,
   } = React.useContext(TodoContext);
 
   return (
@@ -64,6 +68,12 @@ function AppUI() {
       {!!openModalEdit && (
         <Modal>
           <EditTodo></EditTodo>
+        </Modal>
+      )}
+
+      {!!openModalLogin && (
+        <Modal>
+          <Login></Login>
         </Modal>
       )}
 
