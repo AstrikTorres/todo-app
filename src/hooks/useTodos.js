@@ -7,9 +7,7 @@ const defaultTodos = [
   { text: "Llorar con la llorona", completed: true },
 ]
 
-const TodoContext = React.createContext();
-
-function TodoProvider(props) {
+function useTodos() {
   const {item: todos, saveItem: saveTodos, loading, error} = useLocalStorage('TODOS_V1', defaultTodos);
   const { item: token, saveItem: saveToken, loading: loadingToken, error: errorToken } = useLocalStorage('token', "");
   const { item: isLoged, saveItem: setIsLoged } = useLocalStorage('isLoged', false);
@@ -113,40 +111,36 @@ function TodoProvider(props) {
     saveTodos(newTodos);
   }
 
-  return (
-    <TodoContext.Provider value={{
-      loading,
-      error,
-      totalTodos,
-      completedTodos,
-      searchValue,
-      setSearchValue,
-      searchedTodos,
-      toggleCompleteTodo,
-      addTodo,
-      editTodo,
-      deleteTodo,
-      deleteCompletedTodos,
-      openModal,
-      setOpenModal,
-      openModalEdit, 
-      setOpenModalEdit,
-      todoValue,
-      setTodoValue,
-      verifyTodoDuplied,
-      openModalLogin,
-      setOpenModalLogin,
-      isLoged,
-      setIsLoged,
-      token,
-      saveToken,
-      loadingToken,
-      errorToken,
-      getAuth
-    }}>
-      {props.children}
-    </TodoContext.Provider>
-  );
+  return {
+    loading,
+    error,
+    totalTodos,
+    completedTodos,
+    searchValue,
+    setSearchValue,
+    searchedTodos,
+    toggleCompleteTodo,
+    addTodo,
+    editTodo,
+    deleteTodo,
+    deleteCompletedTodos,
+    openModal,
+    setOpenModal,
+    openModalEdit,
+    setOpenModalEdit,
+    todoValue,
+    setTodoValue,
+    verifyTodoDuplied,
+    openModalLogin,
+    setOpenModalLogin,
+    isLoged,
+    setIsLoged,
+    token,
+    saveToken,
+    loadingToken,
+    errorToken,
+    getAuth
+  };
 }
 
-export { TodoContext, TodoProvider };
+export { useTodos };

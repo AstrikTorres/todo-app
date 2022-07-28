@@ -1,5 +1,5 @@
 import React from 'react';
-import { TodoContext } from "../TodoContext";
+import { TodoContext } from "../hooks/useTodos";
 import './TodoForm.css';
 
 function TodoForm({ setOpenModal, addTodo, verifyTodoDuplied }) {

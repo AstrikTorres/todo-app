@@ -1,5 +1,5 @@
 import React from "react";
-import { TodoContext } from "../TodoContext";
+import { TodoContext } from "../hooks/useTodos";
 
 function EditTodo({ setOpenModalEdit, todoValue, editTodo, verifyTodoDuplied }) {
   const [newTodoValue, setNewTodoValue] = React.useState('');
