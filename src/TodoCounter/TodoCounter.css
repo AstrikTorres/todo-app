@@ -4,3 +4,7 @@
   margin : 9px auto 14px;
   color : #fff;
 }
+
+.TodoCounter--loading {
+  opacity: 0.3;
+}

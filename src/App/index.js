@@ -48,18 +48,17 @@ function App() {
   } = useTodos();
   return (
     <React.Fragment>
-      <TittleApp/>
+      <TittleApp loading={loading}>
+        <TodoCounter
+          totalTodos={totalTodos}
+          completedTodos={completedTodos}
+        />
 
-      <TodoCounter
-        totalTodos={totalTodos}
-        completedTodos={completedTodos}
-      />
-
-      <TodoSearch
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-      />
-
+        <TodoSearch
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
+      </TittleApp>
       <TodoList>
         {error && <TodosError/>}
         {loading && 
@@ -104,7 +103,7 @@ function App() {
         </Modal>
       )}
 
-      {(!!openModalLogin && !isLoged) && (
+      {(!!openModalLogin && !isLoged && !loading) && (
         <Modal>
           <Login
             setOpenModalLogin={setOpenModalLogin}
