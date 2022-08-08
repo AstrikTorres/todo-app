@@ -1,43 +1,13 @@
 import React from "react";
 import { useLocalStorage } from "./useLocalStorage";
 
-const defaultTodos = [
-  { text: "Cortar cebolla", completed: false },
-  { text: "Tomar curso de React", completed: false },
-  { text: "Llorar con la llorona", completed: true },
-]
-
 function useTodos() {
-  const {item: todos, saveItem: saveTodos, loading, error} = useLocalStorage('TODOS_V1', defaultTodos);
-  const { item: token, saveItem: saveToken, loading: loadingToken, error: errorToken } = useLocalStorage('token', "");
-  const { item: isLoged, saveItem: setIsLoged } = useLocalStorage('isLoged', false);
+  const { item: todos, saveItem: saveTodos, loading, error } = useLocalStorage('TODOS_V1',[]);
 
   const [searchValue, setSearchValue] = React.useState('');
   const [openModal, setOpenModal] = React.useState(false);
   const [openModalEdit, setOpenModalEdit] = React.useState(false);
   const [todoValue, setTodoValue] = React.useState('');
-
-  const getAuth = () => {
-    fetch('http://localhost:8080/api/users/auth', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': token
-      }
-    }).then(response => response.status)
-      .then(status => {
-        if (status === 200) {
-          setIsLoged(true);
-        }
-      }
-    )
-  }
-
-  if (token && !isLoged) {
-    getAuth();
-  }
-
-  const [openModalLogin, setOpenModalLogin] = React.useState(!isLoged);
 
   const completedTodos = todos.filter(todo => !!todo.completed).length;
   const totalTodos = todos.length;
@@ -131,15 +101,8 @@ function useTodos() {
     todoValue,
     setTodoValue,
     verifyTodoDuplied,
-    openModalLogin,
-    setOpenModalLogin,
-    isLoged,
-    setIsLoged,
-    token,
-    saveToken,
-    loadingToken,
-    errorToken,
-    getAuth
+    todos,
+    saveTodos,
   };
 }
 

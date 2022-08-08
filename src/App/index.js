@@ -14,8 +14,20 @@ import { EmptyTodos } from "../loadingSkeleton/EmptyTodos";
 import { DeleteCompletedButton } from "../DeleteCompletedButton";
 import { EditTodo } from "../EditTodo";
 import { Login } from "../Login";
+import { useApiUsers } from '../hooks/useApiUsers';
+import { useApiTodos } from '../hooks/useApiTodos';
 
 function App() {
+  
+  const {
+    openModalLogin,
+    setOpenModalLogin,
+    isLoged,
+    setIsLoged,
+    token,
+    saveToken,
+    getAuth
+  } = useApiUsers();
   const {
     loading,
     error,
@@ -36,15 +48,6 @@ function App() {
     todoValue,
     setTodoValue,
     verifyTodoDuplied,
-    openModalLogin,
-    setOpenModalLogin,
-    isLoged,
-    setIsLoged,
-    token,
-    saveToken,
-    loadingToken,
-    errorToken,
-    getAuth
   } = useTodos();
   return (
     <React.Fragment>
