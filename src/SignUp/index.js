@@ -5,7 +5,39 @@ function SignUp({ setOpenModalSignUp, setIsLoged, saveToken, setOpenModalLogin }
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		
+		const formData = new FormData(form.current);
+		const data = {
+			username: formData.get('username'),
+			password: formData.get('password')
+		}
+		if (data.username !== '' && data.password !== '') {
+			fetch('http://localhost:8080/api/users', {
+				method: 'POST',
+				body: JSON.stringify(data),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			}).then(response => response.status)
+              .then(status => {
+                if (status === 201) {
+                    fetch('http://localhost:8080/api/login', {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                    })
+                    .then(response => response.headers.get('Authorization'))
+                    .then(token => {
+                        saveToken(token);
+                        setIsLoged(true);
+                        setOpenModalSignUp(prevState => !prevState);
+                    })
+                } else {
+                    setIsLoged(false);
+                }
+            })
+		}
 	}
 
 	const handleLogin = () => {
@@ -23,7 +55,7 @@ function SignUp({ setOpenModalSignUp, setIsLoged, saveToken, setOpenModalLogin }
 					<label htmlFor="password" className="label">Password</label>
 					<input type="password" name="password" placeholder="*********" className="input input-password" />
 					<button
-						className="primary-sbutton sign-up-button"
+						className="primary-button sign-up-button"
 						onClick={handleSubmit}
 					>
 						Create Account
