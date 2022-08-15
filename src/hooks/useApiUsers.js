@@ -64,6 +64,7 @@ function useApiUsers() {
   //   console.log(result);
   // }, [result]);
 
+  const [openModalSignUp, setOpenModalSignUp] = React.useState(false);
   const [openModalLogin, setOpenModalLogin] = React.useState(!isLoged);
 
   return {
@@ -73,7 +74,9 @@ function useApiUsers() {
     setIsLoged,
     token,
     saveToken,
-    getAuth
+    getAuth,
+    openModalSignUp,
+    setOpenModalSignUp
   }
 
 }

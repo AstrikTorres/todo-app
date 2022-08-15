@@ -1,8 +1,7 @@
 import React from 'react';
-import { TodoContext } from '../hooks/useTodos';
 
-function Login({  setOpenModalLogin, setIsLoged, saveToken}) {
-  const form = React.useRef(null);
+function Login({  setOpenModalLogin, setIsLoged, saveToken, setOpenModalSignUp }) {
+	const form = React.useRef(null);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -29,6 +28,11 @@ function Login({  setOpenModalLogin, setIsLoged, saveToken}) {
 
 		}
 	}
+
+	const handleSignUp = () => {
+		setOpenModalLogin(prevState => !prevState);
+		setOpenModalSignUp(prevState => !prevState);
+	}
 	
   return (
     <div className="Login">
@@ -40,13 +44,16 @@ function Login({  setOpenModalLogin, setIsLoged, saveToken}) {
 					<input type="password" name="password" placeholder="*********" className="input input-password" />
 					<button
 						className="primary-button login-button"
-						onClick={handleSubmit}>
+						onClick={handleSubmit}
+					>
 						Log in
 					</button>
 					<a href="/">Forgot my password</a>
 				</form>
 				<button
-					className="secondary-button signup-button">
+					onClick={handleSignUp}
+					className="secondary-button signup-button"
+				>
 					Sign up
 				</button>
 			</div>

@@ -14,6 +14,7 @@ import { EmptyTodos } from "../loadingSkeleton/EmptyTodos";
 import { DeleteCompletedButton } from "../DeleteCompletedButton";
 import { EditTodo } from "../EditTodo";
 import { Login } from "../Login";
+import { SignUp } from "../SignUp";
 import { useApiUsers } from '../hooks/useApiUsers';
 import { useApiTodos } from '../hooks/useApiTodos';
 
@@ -26,7 +27,9 @@ function App() {
     setIsLoged,
     token,
     saveToken,
-    getAuth
+    getAuth,
+    openModalSignUp,
+    setOpenModalSignUp
   } = useApiUsers();
   const {
     loading,
@@ -110,6 +113,17 @@ function App() {
         <Modal>
           <Login
             setOpenModalLogin={setOpenModalLogin}
+            setIslogged={setIsLoged}
+            saveToken={saveToken}
+            setOpenModalSignUp={setOpenModalSignUp}
+          />
+        </Modal>
+      )}
+
+      {(!!openModalSignUp && !isLoged) && (
+        <Modal>
+          <SignUp
+            setOpenModalSignUp={setOpenModalSignUp}
             setIslogged={setIsLoged}
             saveToken={saveToken}
           />
