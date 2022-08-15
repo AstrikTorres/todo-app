@@ -126,6 +126,7 @@ function App() {
             setOpenModalSignUp={setOpenModalSignUp}
             setIslogged={setIsLoged}
             saveToken={saveToken}
+            setOpenModalLogin={setOpenModalLogin}
           />
         </Modal>
       )}
