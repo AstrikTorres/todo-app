@@ -13,7 +13,7 @@ function useApiUsers() {
 
   const URL_API = 'http://localhost:8080/api/';
   
-  const getAuth = async () => {
+  const getAuth = useCallback(async () => {
     await fetch(`${URL_API}users/auth`, {
       method: 'GET',
       headers: {
@@ -30,10 +30,10 @@ function useApiUsers() {
           setLoadingApi(false);
         }
       })
-  }
+  });
 
   React.useEffect(() => {
-    if (token && !isLoged) {
+    if (token) {
       getAuth();
     }
   }, [token]);

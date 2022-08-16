@@ -1,40 +1,35 @@
 import React from 'react';
-import { useLocalStorage } from './useLocalStorage';
-import { useTodos } from './useTodos';
 
-function useApiTodos(endpoint, method, body = {}) {
-  const { item: token, saveItem: saveToken} = useLocalStorage('token', "");
-
+function useApiTodos(token) {
   const URL_API = 'http://localhost:8080/api/';
 
   const [errorApi, setErrorApi] = React.useState(null);
   const [loadingApi, setLoadingApi] = React.useState(true);
   const [result, setResult] = React.useState('');
 
-  const apiCall = async () => {
-    await fetch(`${URL_API}${endpoint}`, {
+  const callApi = async (endpoint, method, body = {}) => {
+    const options = {
       method: method,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': token
       }
-    })
-      .then(response => response.json())
-      .then(data => {
-        setResult(data);
-        setLoadingApi(false);
-      }
-    )
-  };
-  
-  React.useEffect(() => {
-    apiCall();
-  }, [token]);
+    }
+    if (body !== {}) {
+      options.body = JSON.stringify(body);
+    }  
+    const data = await fetch(`${URL_API}${endpoint}`, options)
+      .catch(e => setErrorApi(e));
+    const json = await data.json();
+    setResult(json);
+    setLoadingApi(false); 
+  }
 
   return {
     result,
     loadingApi,
     errorApi,
+    callApi
   }
 }
 
