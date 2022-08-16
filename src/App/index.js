@@ -32,6 +32,12 @@ function App() {
     setOpenModalSignUp
   } = useApiUsers();
   const {
+    callApi,
+    loadingApi,
+    errorApi,
+    result
+  } = useApiTodos(token);
+  const {
     loading,
     error,
     totalTodos,
@@ -94,6 +100,9 @@ function App() {
             setOpenModal={setOpenModal}
             addTodo={addTodo}
             verifyTodoDuplied={verifyTodoDuplied}
+            token={token}
+            callApi={callApi}
+            result={result}
           />
         </Modal>
       )}
