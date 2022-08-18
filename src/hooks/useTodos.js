@@ -10,6 +10,7 @@ function useTodos() {
   const [todoValue, setTodoValue] = React.useState('');
 
   const completedTodos = todos.filter(todo => !!todo.completed).length;
+  const completedTodosArr = todos.filter(todo => !!todo.completed);
   const totalTodos = todos.length;
 
   let searchedTodos = [];
@@ -79,6 +80,7 @@ function useTodos() {
       newTodos.splice(todoIndex, 1);
     });
     saveTodos(newTodos);
+    return newTodos;
   }
 
   return {
@@ -103,6 +105,7 @@ function useTodos() {
     verifyTodoDuplied,
     todos,
     saveTodos,
+    completedTodosArr
   };
 }
 

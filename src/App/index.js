@@ -57,6 +57,7 @@ function App() {
     todoValue,
     setTodoValue,
     verifyTodoDuplied,
+    completedTodosArr
   } = useTodos();
   return (
     <React.Fragment>
@@ -91,7 +92,10 @@ function App() {
                 toggleCompleteTodo(todo.text);
                 callApi('todos', 'PUT', { ...todo, completed: todo.completed });
               }}
-              onDelete={() => deleteTodo(todo.text)}
+              onDelete={() => {
+                deleteTodo(todo.text); 
+                callApi(`todos/${todo.id}`, 'DELETE');
+              }}
             />
           ))
         }
@@ -152,7 +156,10 @@ function App() {
       <DeleteCompletedButton
         whidth="100%"
         height="42px"
-        deleteCompletedTodos={deleteCompletedTodos}
+        deleteCompletedTodos={() => {
+          deleteCompletedTodos();
+          callApi('todos/list', 'DELETE', completedTodosArr);
+        }}
       />
 
     </React.Fragment>
