@@ -87,7 +87,10 @@ function App() {
               text={todo.text}
               setTodoValue={setTodoValue}
               setOpenModalEdit={setOpenModalEdit}
-              onComplete={() => toggleCompleteTodo(todo.text)}
+              onComplete={() => {
+                toggleCompleteTodo(todo.text);
+                callApi('todos', 'PUT', { ...todo, completed: todo.completed });
+              }}
               onDelete={() => deleteTodo(todo.text)}
             />
           ))

@@ -1,7 +1,7 @@
 import React from 'react';
 import './TodoForm.css';
 
-function TodoForm({ setOpenModal, addTodo, verifyTodoDuplied, callApi, result }) {
+function TodoForm({ setOpenModal, addTodo, verifyTodoDuplied, callApi }) {
   const [newTodoValue, setNewTodoValue] = React.useState('');
 
   const onOut = () => {
