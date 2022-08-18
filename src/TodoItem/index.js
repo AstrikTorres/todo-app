@@ -1,6 +1,5 @@
 import React from "react";
 import "./TodoItem.css";
-import { TodoContext } from "../hooks/useTodos";
 import { ImCheckboxUnchecked } from "react-icons/im";
 import { ImCheckboxChecked } from "react-icons/im";
 import { TiDelete } from "react-icons/ti";
@@ -39,6 +38,8 @@ function TodoItem(props) {
           onClick={() => {
             props.setTodoValue(props.text);
             props.setOpenModalEdit(true);
+            props.setTodoId(props.id);
+            props.setTodoCompleted(props.completed);
           }}
         />
         <TiDelete

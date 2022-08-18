@@ -8,6 +8,8 @@ function useTodos() {
   const [openModal, setOpenModal] = React.useState(false);
   const [openModalEdit, setOpenModalEdit] = React.useState(false);
   const [todoValue, setTodoValue] = React.useState('');
+  const [todoId, setTodoId] = React.useState('');
+  const [todoCompleted, setTodoCompleted] = React.useState(null);
 
   const completedTodos = todos.filter(todo => !!todo.completed).length;
   const completedTodosArr = todos.filter(todo => !!todo.completed);
@@ -59,9 +61,10 @@ function useTodos() {
     } else {
       text = text.trim();
       const newTodos = [...todos];
-      const todoIndex = newTodos.findIndex(todo => todo.text == text);
+      const todoIndex = newTodos.findIndex(todo => todo.text === text);
       newTodos[todoIndex].text = newText;
       saveTodos(newTodos);
+      return todoIndex;
     }
   };
 
@@ -105,7 +108,11 @@ function useTodos() {
     verifyTodoDuplied,
     todos,
     saveTodos,
-    completedTodosArr
+    completedTodosArr,
+    todoId,
+    setTodoId,
+    todoCompleted,
+    setTodoCompleted
   };
 }
 

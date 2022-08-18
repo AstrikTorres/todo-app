@@ -57,7 +57,11 @@ function App() {
     todoValue,
     setTodoValue,
     verifyTodoDuplied,
-    completedTodosArr
+    completedTodosArr,
+    todoId,
+    setTodoId,
+    todoCompleted,
+    setTodoCompleted
   } = useTodos();
   return (
     <React.Fragment>
@@ -84,7 +88,10 @@ function App() {
           searchedTodos.map(todo => (
             <TodoItem
               completed={todo.completed}
-              key={todo.text}
+              key={todo.id}
+              id={todo.id}
+              setTodoId={setTodoId}
+              setTodoCompleted={setTodoCompleted}
               text={todo.text}
               setTodoValue={setTodoValue}
               setOpenModalEdit={setOpenModalEdit}
@@ -121,6 +128,9 @@ function App() {
             editTodo={editTodo}
             todoValue={todoValue}
             verifyTodoDuplied={verifyTodoDuplied}
+            todoId={todoId}
+            todoCompleted={todoCompleted}
+            callApi={callApi}
           />
         </Modal>
       )}
