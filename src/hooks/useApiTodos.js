@@ -22,7 +22,8 @@ function useApiTodos(token) {
       .catch(e => setErrorApi(e));
     const json = await data.json();
     setResult(json);
-    setLoadingApi(false); 
+    setLoadingApi(false);
+    return json;
   }
 
   return {

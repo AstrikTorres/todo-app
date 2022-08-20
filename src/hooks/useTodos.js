@@ -44,15 +44,15 @@ function useTodos() {
     saveTodos(newTodos);
   };
 
-  const addTodo = (text) => {
-    if (!text.length || verifyTodoDuplied(text)) {
+  const addTodo = (todo) => {
+    if (!todo.text.length || verifyTodoDuplied(todo.text)) {
       return;
-    } else {
-      text = text.trim();
-      const newTodos = [...todos];
-      newTodos.push({ text, completed: false });
-      saveTodos(newTodos);
     }
+    
+    todo.text = todo.text.trim();
+    const newTodos = [...todos];
+    newTodos.push(todo);
+    saveTodos(newTodos);
   };
 
   const editTodo = (text, newText) => {

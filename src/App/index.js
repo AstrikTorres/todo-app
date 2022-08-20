@@ -88,7 +88,7 @@ function App() {
           searchedTodos.map(todo => (
             <TodoItem
               completed={todo.completed}
-              key={todo.id}
+              key={todo.text}
               id={todo.id}
               setTodoId={setTodoId}
               setTodoCompleted={setTodoCompleted}
