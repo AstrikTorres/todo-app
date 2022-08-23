@@ -4,12 +4,10 @@ import { useTodos } from "./useTodos";
 
 function useApiUsers() {
   const { item: token, saveItem: saveToken} = useLocalStorage('token', "");
-  const { item: isLoged, saveItem: setIsLoged } = useLocalStorage('isLoged', false);
-  const [loadingApi, setLoadingApi] = React.useState(true);
-  const [errorApi, setErrorApi] = React.useState(false);
-  const { todos, saveTodos } = useTodos();
-
-  const [result, setResult] = React.useState('');
+  const { item: isLoged, saveItem: saveIsLoged } = useLocalStorage('isLoged', false);
+  const [loadingApiUsers, setLoadingApiUsers] = React.useState(true);
+  const [errorApiUsers, setErrorApiUsers] = React.useState(false);
+  const { saveTodos } = useTodos();
 
   const URL_API = 'http://localhost:8080/api/';
   
@@ -23,17 +21,19 @@ function useApiUsers() {
     }).then(response => response.status)
       .then(status => {
         if (status === 200) {
-          setIsLoged(true);
-          setLoadingApi(true);
+          saveIsLoged(true);
+          setLoadingApiUsers(true);
         } else {
-          setIsLoged(false);
-          setLoadingApi(false);
+          saveIsLoged(false);
+          saveToken("");
+          saveTodos([])
+          setLoadingApiUsers(false);
         }
       })
   });
 
   React.useEffect(() => {
-    if (token) {
+    if (token && loadingApiUsers === true) {
       getAuth();
     }
   }, [token]);
@@ -47,22 +47,18 @@ function useApiUsers() {
       }
     })
     const json = await data.json();
-    setResult(json);
-    setLoadingApi(false);
-    saveTodos(json);
+    setLoadingApiUsers(false);
+    if (JSON.stringify(json).startsWith("[")) {
+    saveTodos(json);}
   });
 
   React.useEffect(() => {
-    if (loadingApi && isLoged) {
+    if (loadingApiUsers && isLoged) {
       getTodos().catch(error => {
-        setErrorApi(error);
+        setErrorApiUsers(error);
       });
     }
   }, [isLoged]);
-
-  // React.useEffect(async () => {
-  //   console.log(result);
-  // }, [result]);
 
   const [openModalSignUp, setOpenModalSignUp] = React.useState(false);
   const [openModalLogin, setOpenModalLogin] = React.useState(!isLoged);
@@ -71,12 +67,14 @@ function useApiUsers() {
     openModalLogin,
     setOpenModalLogin,
     isLoged,
-    setIsLoged,
+    saveIsLoged,
     token,
     saveToken,
     getAuth,
     openModalSignUp,
-    setOpenModalSignUp
+    setOpenModalSignUp,
+    loadingApiUsers,
+    errorApiUsers,
   }
 
 }

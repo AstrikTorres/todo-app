@@ -3,8 +3,8 @@ import React from 'react';
 function useApiTodos(token) {
   const URL_API = 'http://localhost:8080/api/';
 
-  const [errorApi, setErrorApi] = React.useState(null);
-  const [loadingApi, setLoadingApi] = React.useState(true);
+  const [errorApiTodos, setErrorApiTodos] = React.useState(null);
+  const [loadingApiTodos, setLoadingApiTodos] = React.useState(true);
   const [result, setResult] = React.useState('');
 
   const callApi = async (endpoint, method, body = {}) => {
@@ -19,17 +19,17 @@ function useApiTodos(token) {
       options.body = JSON.stringify(body);
     }  
     const data = await fetch(`${URL_API}${endpoint}`, options)
-      .catch(e => setErrorApi(e));
+      .catch(e => setErrorApiTodos(e));
     const json = await data.json();
     setResult(json);
-    setLoadingApi(false);
+    setLoadingApiTodos(false);
     return json;
   }
 
   return {
     result,
-    loadingApi,
-    errorApi,
+    loadingApiTodos,
+    errorApiTodos,
     callApi
   }
 }
