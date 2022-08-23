@@ -49,7 +49,8 @@ function useApiUsers() {
     const json = await data.json();
     setLoadingApiUsers(false);
     if (JSON.stringify(json).startsWith("[")) {
-    saveTodos(json);}
+      saveTodos(json);
+    }
   });
 
   React.useEffect(() => {
@@ -74,7 +75,7 @@ function useApiUsers() {
     openModalSignUp,
     setOpenModalSignUp,
     loadingApiUsers,
-    errorApiUsers,
+    errorApiUsers
   }
 
 }

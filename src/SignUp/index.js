@@ -1,6 +1,6 @@
 import React from "react";
 
-function SignUp({ setOpenModalSignUp, setIsLoged, saveToken, setOpenModalLogin }) {
+function SignUp({ setOpenModalSignUp, saveIsLoged, saveToken, setOpenModalLogin }) {
     const form = React.useRef(null);
 
 	const handleSubmit = (e) => {
@@ -26,15 +26,14 @@ function SignUp({ setOpenModalSignUp, setIsLoged, saveToken, setOpenModalLogin }
                     headers: {
                         'Content-Type': 'application/json'
                     }
-                    })
-                    .then(response => response.headers.get('Authorization'))
-                    .then(token => {
+                    }).then(response => response.headers.get('Authorization'))
+                      .then(token => {
                         saveToken(token);
-                        setIsLoged(true);
+                        saveIsLoged(true);
                         setOpenModalSignUp(prevState => !prevState);
                     })
                 } else {
-                    setIsLoged(false);
+                    saveIsLoged(false);
                 }
             })
 		}

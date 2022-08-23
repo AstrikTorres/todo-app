@@ -24,18 +24,19 @@ function App() {
     openModalLogin,
     setOpenModalLogin,
     isLoged,
-    setIsLoged,
+    saveIsLoged,
     token,
     saveToken,
     getAuth,
     openModalSignUp,
-    setOpenModalSignUp
+    setOpenModalSignUp,
+    loadingApiUsers,
+    errorApiUsers,
   } = useApiUsers();
   const {
     callApi,
-    loadingApi,
-    errorApi,
-    result
+    loadingApiTodos,
+    errorApiTodos,
   } = useApiTodos(token);
   const {
     loading,
@@ -61,11 +62,11 @@ function App() {
     todoId,
     setTodoId,
     todoCompleted,
-    setTodoCompleted
+    setTodoCompleted,
   } = useTodos();
   return (
     <React.Fragment>
-      <TittleApp loading={loading}>
+      <TittleApp loading={(loading || loadingApiUsers)}>
         <TodoCounter
           totalTodos={totalTodos}
           completedTodos={completedTodos}
@@ -76,15 +77,38 @@ function App() {
           setSearchValue={setSearchValue}
         />
       </TittleApp>
+
+      {(!!openModalLogin && !isLoged && !loading) && (
+        <Modal>
+          <Login
+            setOpenModalLogin={setOpenModalLogin}
+            saveIsLoged={saveIsLoged}
+            saveToken={saveToken}
+            setOpenModalSignUp={setOpenModalSignUp}
+          />
+        </Modal>
+      )}
+
+      {(!!openModalSignUp && !isLoged) && (
+        <Modal>
+          <SignUp
+            setOpenModalSignUp={setOpenModalSignUp}
+            saveIsLoged={saveIsLoged}
+            saveToken={saveToken}
+            setOpenModalLogin={setOpenModalLogin}
+          />
+        </Modal>
+      )}
+
       <TodoList>
-        {error && <TodosError/>}
-        {loading && 
-          new Array(4).fill().map((item, index)=>(
+        {(error && errorApiUsers && errorApiTodos) && <TodosError/>}
+        {(loading || loadingApiUsers) && 
+          new Array(2).fill().map((item, index)=>(
             <TodosLoading key={index} />
           ))
         }
-        {(!loading && !searchedTodos.length) && <EmptyTodos/>}
-        {(!loading && !error) &&
+        {(!loading && !loadingApiUsers && !totalTodos) && <EmptyTodos/>}
+        {(!loading && !loadingApiUsers && !error && !errorApiUsers && isLoged) &&
           searchedTodos.map(todo => (
             <TodoItem
               completed={todo.completed}
@@ -116,7 +140,6 @@ function App() {
             verifyTodoDuplied={verifyTodoDuplied}
             token={token}
             callApi={callApi}
-            result={result}
           />
         </Modal>
       )}
@@ -131,28 +154,6 @@ function App() {
             todoId={todoId}
             todoCompleted={todoCompleted}
             callApi={callApi}
-          />
-        </Modal>
-      )}
-
-      {(!!openModalLogin && !isLoged && !loading) && (
-        <Modal>
-          <Login
-            setOpenModalLogin={setOpenModalLogin}
-            setIslogged={setIsLoged}
-            saveToken={saveToken}
-            setOpenModalSignUp={setOpenModalSignUp}
-          />
-        </Modal>
-      )}
-
-      {(!!openModalSignUp && !isLoged) && (
-        <Modal>
-          <SignUp
-            setOpenModalSignUp={setOpenModalSignUp}
-            setIslogged={setIsLoged}
-            saveToken={saveToken}
-            setOpenModalLogin={setOpenModalLogin}
           />
         </Modal>
       )}

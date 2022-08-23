@@ -13,7 +13,11 @@ function useTodos() {
 
   const completedTodos = todos.filter(todo => !!todo.completed).length;
   const completedTodosArr = todos.filter(todo => !!todo.completed);
-  const totalTodos = todos.length;
+  
+  const [totalTodos, setTotalTodos] = React.useState(todos.length);
+  React.useEffect(() => {
+    setTotalTodos(state => state = todos.length);
+  } ,[todos]);
 
   let searchedTodos = [];
 
@@ -112,7 +116,7 @@ function useTodos() {
     todoId,
     setTodoId,
     todoCompleted,
-    setTodoCompleted
+    setTodoCompleted,
   };
 }
 
