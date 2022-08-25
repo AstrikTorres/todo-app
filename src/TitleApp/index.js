@@ -8,7 +8,7 @@ const styles = {
 const TitleApp = ({ children, loading }) => {
   return (
     <header>
-      <h1 style={styles}>Todo List</h1>
+      <h1 style={styles}>To-Do List</h1>
       {
         React.Children
           .toArray(children)
