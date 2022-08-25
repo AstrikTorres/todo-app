@@ -1,5 +1,4 @@
 import React from 'react'
-import { useTodos } from "../hooks/useTodos";
 import { TodoCounter } from '../TodoCounter';
 import { TodoSearch } from '../TodoSearch';
 import { CreateTodoButton } from '../CreateTodoButton';
@@ -22,7 +21,7 @@ import './App.css';
 
 function App() {
   
-  const {
+  const { 
     openModalLogin,
     setOpenModalLogin,
     isLoged,
@@ -36,13 +35,6 @@ function App() {
     username,
     setUsername,
     setLoadingApiUsers,
-    todos,
-  } = useApiUsers();
-  const {
-    callApi,
-    errorApiTodos,
-  } = useApiTodos(token);
-  const {
     loading,
     error,
     totalTodos,
@@ -57,18 +49,22 @@ function App() {
     deleteCompletedTodos,
     openModal,
     setOpenModal,
-    openModalEdit, 
+    openModalEdit,
     setOpenModalEdit,
     todoValue,
     setTodoValue,
     verifyTodoDuplied,
+    saveTodos,
     completedTodosArr,
     todoId,
     setTodoId,
     todoCompleted,
     setTodoCompleted,
-    saveTodos
-  } = useTodos();
+  } = useApiUsers();
+  const {
+    callApi,
+    errorApiTodos,
+  } = useApiTodos(token);
   return (
     <React.Fragment>
       <User

@@ -21,9 +21,8 @@ function Login({  setOpenModalLogin, saveIsLoged, saveToken, setOpenModalSignUp 
 			  .then(token => {
 			    saveToken(token);
 				saveIsLoged(true);
-			}).finally(() => {
-				window.location.reload();
-			});
+				setOpenModalLogin(false);
+			})
 		}
 	}
 

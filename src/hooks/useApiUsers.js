@@ -8,7 +8,34 @@ function useApiUsers() {
   const [loadingApiUsers, setLoadingApiUsers] = React.useState(true);
   const [errorApiUsers, setErrorApiUsers] = React.useState(false);
   const [username, setUsername] = React.useState("");
-  const { todos, saveTodos } = useTodos();
+  const {
+    loading,
+    error,
+    totalTodos,
+    completedTodos,
+    searchValue,
+    setSearchValue,
+    searchedTodos,
+    toggleCompleteTodo,
+    addTodo,
+    editTodo,
+    deleteTodo,
+    deleteCompletedTodos,
+    openModal,
+    setOpenModal,
+    openModalEdit,
+    setOpenModalEdit,
+    todoValue,
+    setTodoValue,
+    verifyTodoDuplied,
+    todos,
+    saveTodos,
+    completedTodosArr,
+    todoId,
+    setTodoId,
+    todoCompleted,
+    setTodoCompleted,
+  } = useTodos();
 
   const URL_API = 'http://localhost:8080/api/';
   
@@ -81,7 +108,32 @@ function useApiUsers() {
     username,
     setUsername,
     setLoadingApiUsers,
+    loading,
+    error,
+    totalTodos,
+    completedTodos,
+    searchValue,
+    setSearchValue,
+    searchedTodos,
+    toggleCompleteTodo,
+    addTodo,
+    editTodo,
+    deleteTodo,
+    deleteCompletedTodos,
+    openModal,
+    setOpenModal,
+    openModalEdit,
+    setOpenModalEdit,
+    todoValue,
+    setTodoValue,
+    verifyTodoDuplied,
     todos,
+    saveTodos,
+    completedTodosArr,
+    todoId,
+    setTodoId,
+    todoCompleted,
+    setTodoCompleted,
   }
 
 }
