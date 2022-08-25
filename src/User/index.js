@@ -25,16 +25,20 @@ function User({ username, logout, loading }) {
         }
       </div>
       <div className="user--logout">
-        <IoLogOutSharp 
-          className="user--logout-icon" 
-          onClick={logout} 
-        />
-        <span 
-          className="user--logout-text" 
-          onClick={logout}
-        >
-          Logout
-        </span>
+        {!loading &&
+          <IoLogOutSharp 
+            className="user--logout-icon" 
+            onClick={logout} 
+          />
+        }
+        {!loading &&
+          <span 
+            className="user--logout-text" 
+            onClick={logout}
+          >
+            Logout
+          </span>
+        }
       </div>
     </div>
   );
