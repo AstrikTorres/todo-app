@@ -8,7 +8,7 @@ function useApiUsers() {
   const [loadingApiUsers, setLoadingApiUsers] = React.useState(true);
   const [errorApiUsers, setErrorApiUsers] = React.useState(false);
   const [username, setUsername] = React.useState("");
-  const { saveTodos } = useTodos();
+  const { todos, saveTodos } = useTodos();
 
   const URL_API = 'http://localhost:8080/api/';
   
@@ -78,7 +78,10 @@ function useApiUsers() {
     setOpenModalSignUp,
     loadingApiUsers,
     errorApiUsers,
-    username
+    username,
+    setUsername,
+    setLoadingApiUsers,
+    todos,
   }
 
 }

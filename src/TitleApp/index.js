@@ -5,7 +5,7 @@ const styles = {
   textAlign: "center",
 };
 
-const TittleApp = ({ children, loading }) => {
+const TitleApp = ({ children, loading }) => {
   return (
     <header>
       <h1 style={styles}>Todo List</h1>
@@ -20,4 +20,4 @@ const TittleApp = ({ children, loading }) => {
   );
 }
 
-export { TittleApp };
+export { TitleApp };

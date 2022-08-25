@@ -5,7 +5,7 @@ import { TodoSearch } from '../TodoSearch';
 import { CreateTodoButton } from '../CreateTodoButton';
 import { TodoItem } from '../TodoItem';
 import { TodoList } from '../TodoList'
-import { TittleApp } from '../TittleApp'
+import { TitleApp } from '../TitleApp'
 import { Modal } from '../Modal';
 import { TodoForm } from '../TodoForm';
 import { TodosError } from "../loadingSkeleton/TodosError";
@@ -15,8 +15,10 @@ import { DeleteCompletedButton } from "../DeleteCompletedButton";
 import { EditTodo } from "../EditTodo";
 import { Login } from "../Login";
 import { SignUp } from "../SignUp";
+import { User } from "../User";
 import { useApiUsers } from '../hooks/useApiUsers';
 import { useApiTodos } from '../hooks/useApiTodos';
+import './App.css';
 
 function App() {
   
@@ -27,15 +29,17 @@ function App() {
     saveIsLoged,
     token,
     saveToken,
-    getAuth,
     openModalSignUp,
     setOpenModalSignUp,
     loadingApiUsers,
     errorApiUsers,
+    username,
+    setUsername,
+    setLoadingApiUsers,
+    todos,
   } = useApiUsers();
   const {
     callApi,
-    loadingApiTodos,
     errorApiTodos,
   } = useApiTodos(token);
   const {
@@ -63,10 +67,24 @@ function App() {
     setTodoId,
     todoCompleted,
     setTodoCompleted,
+    saveTodos
   } = useTodos();
   return (
     <React.Fragment>
-      <TittleApp loading={(loading || loadingApiUsers)}>
+      <User
+        loading={(loading || loadingApiUsers)}
+        username={username}
+        logout={() => {
+          saveIsLoged(false);
+          saveToken('');
+          setUsername('');
+          saveTodos([]);
+          setLoadingApiUsers(true);
+          setOpenModalLogin(true);
+        }}
+      />
+
+      <TitleApp loading={(loading || loadingApiUsers)}>
         <TodoCounter
           totalTodos={totalTodos}
           completedTodos={completedTodos}
@@ -76,7 +94,7 @@ function App() {
           searchValue={searchValue}
           setSearchValue={setSearchValue}
         />
-      </TittleApp>
+      </TitleApp>
 
       {(!!openModalLogin && !isLoged && !loading) && (
         <Modal>
@@ -85,6 +103,7 @@ function App() {
             saveIsLoged={saveIsLoged}
             saveToken={saveToken}
             setOpenModalSignUp={setOpenModalSignUp}
+            setLoadingApiUsers={setLoadingApiUsers}
           />
         </Modal>
       )}
