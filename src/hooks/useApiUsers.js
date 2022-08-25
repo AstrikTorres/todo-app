@@ -7,29 +7,31 @@ function useApiUsers() {
   const { item: isLoged, saveItem: saveIsLoged } = useLocalStorage('isLoged', false);
   const [loadingApiUsers, setLoadingApiUsers] = React.useState(true);
   const [errorApiUsers, setErrorApiUsers] = React.useState(false);
+  const [username, setUsername] = React.useState("");
   const { saveTodos } = useTodos();
 
   const URL_API = 'http://localhost:8080/api/';
   
   const getAuth = useCallback(async () => {
-    await fetch(`${URL_API}users/auth`, {
+    const response = await fetch(`${URL_API}users/auth`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': token
       }
-    }).then(response => response.status)
-      .then(status => {
-        if (status === 200) {
-          saveIsLoged(true);
-          setLoadingApiUsers(true);
-        } else {
-          saveIsLoged(false);
-          saveToken("");
-          saveTodos([])
-          setLoadingApiUsers(false);
-        }
-      })
+    })
+    const status = response.status;
+    const data = await response.json();
+    if (status === 200) {
+      setUsername(data.username);
+      saveIsLoged(true);
+      setLoadingApiUsers(true);
+    } else {
+      saveIsLoged(false);
+      saveToken("");
+      saveTodos([])
+      setLoadingApiUsers(false);
+    }
   });
 
   React.useEffect(() => {
@@ -75,7 +77,8 @@ function useApiUsers() {
     openModalSignUp,
     setOpenModalSignUp,
     loadingApiUsers,
-    errorApiUsers
+    errorApiUsers,
+    username
   }
 
 }
