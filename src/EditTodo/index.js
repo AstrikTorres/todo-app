@@ -1,14 +1,6 @@
 import React from "react";
-import { TodoContext } from "../TodoContext";
 
-function EditTodo() {
-  const {
-    setOpenModalEdit,
-    todoValue,
-    editTodo,
-    verifyTodoDuplied,
-  } = React.useContext(TodoContext);
-
+function EditTodo({ setOpenModalEdit, todoValue, editTodo, verifyTodoDuplied, callApi, todoId, todoCompleted }) {
   const [newTodoValue, setNewTodoValue] = React.useState('');
 
   const onOut = () => {
@@ -24,12 +16,17 @@ function EditTodo() {
       document.getElementById('label').innerHTML = 'This todo already exists';
     } else {
       editTodo(todoValue, newTodoValue);
+      callApi('todos', 'PUT', {
+        id: todoId,
+        text: newTodoValue,
+        completed: todoCompleted
+      });
       onOut();
     }
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={(e) => onSubmit(e)}>
       <label id="label">Edit</label>
       <textarea
         defaultValue={todoValue}

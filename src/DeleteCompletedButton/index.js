@@ -1,13 +1,9 @@
 import React from "react";
-import { TodoContext } from "../TodoContext";
+import { TodoContext } from "../hooks/useTodos";
 
 function DeleteCompletedButton(props) {
-  const { 
-    deleteCompletedTodos
-  } = React.useContext(TodoContext);
-
   const onClickButton = () => {
-    deleteCompletedTodos();
+    props.deleteCompletedTodos();
   }
   
   return (

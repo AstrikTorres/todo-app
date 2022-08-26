@@ -1,29 +1,22 @@
 import React from 'react';
-import { TodoContext } from "../TodoContext";
 import './TodoForm.css';
 
-function TodoForm() {
+function TodoForm({ setOpenModal, addTodo, verifyTodoDuplied, callApi }) {
   const [newTodoValue, setNewTodoValue] = React.useState('');
-
-  const { 
-    openModal,
-    setOpenModal,
-    addTodo,
-    verifyTodoDuplied,
-  } = React.useContext(TodoContext);
 
   const onOut = () => {
     setOpenModal(prevState => !prevState);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (!newTodoValue.trim().length) {
       document.getElementById('label').innerHTML = 'Please write something';
     } else if (verifyTodoDuplied(newTodoValue)) {
       document.getElementById('label').innerHTML = 'This todo already exists';
     } else {
-      addTodo(newTodoValue);
+      const data = await callApi('todos', 'POST', {text: newTodoValue, completed: false});
+      addTodo(data);
       onOut();
     }
   };

@@ -1,17 +1,11 @@
 import React from "react";
 import "./TodoItem.css";
-import { TodoContext } from "../TodoContext";
 import { ImCheckboxUnchecked } from "react-icons/im";
 import { ImCheckboxChecked } from "react-icons/im";
 import { TiDelete } from "react-icons/ti";
 import { MdEdit } from "react-icons/md";
 
 function TodoItem(props) {
-  const { 
-    setOpenModalEdit,
-    setTodoValue,
-  } = React.useContext(TodoContext);
-
   return (
     <li
       className={ `todo-item ${ props.completed && 'todo-item--completed' }` }
@@ -42,8 +36,10 @@ function TodoItem(props) {
           size="25px"
           className="options-icon"
           onClick={() => {
-            setTodoValue(props.text);
-            setOpenModalEdit(true);
+            props.setTodoValue(props.text);
+            props.setOpenModalEdit(true);
+            props.setTodoId(props.id);
+            props.setTodoCompleted(props.completed);
           }}
         />
         <TiDelete

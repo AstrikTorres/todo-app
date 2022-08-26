@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDom from "react-dom";
 import './Modal.css';
-import { TodoContext } from "../TodoContext";
+import { TodoContext } from "../hooks/useTodos";
 
 function Modal( props ) {
   return ReactDom.createPortal(
