@@ -39,7 +39,7 @@ function Login({
 		}
 
     if (data.username.match(validUsername) && data.password.match(validPassword)) {
-      const response = await fetch("http://localhost:8080/api/login", {
+      const response = await fetch("http://localhost:8080/login", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {

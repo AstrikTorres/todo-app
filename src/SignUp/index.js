@@ -48,7 +48,7 @@ function SignUp({
         .then((response) => response.status)
         .then((status) => {
           if (status === 201) {
-            fetch("http://localhost:8080/api/login", {
+            fetch("http://localhost:8080/login", {
               method: "POST",
               body: JSON.stringify(data),
               headers: {
