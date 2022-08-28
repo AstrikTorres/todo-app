@@ -77,7 +77,7 @@ function Login({
             id="username"
             type="text"
             name="email"
-            placeholder="platzi@example.cm"
+            placeholder="user"
             className="input input-email"
           />
 					<label className="label-alert" id="username-alert"></label>
