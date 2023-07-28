@@ -38,7 +38,7 @@ function SignUp({
 		}
 
     if (data.username.match(validUsername) && data.password.match(validPassword)) {
-      fetch("http://localhost:8080/api/users", {
+      fetch(`${process.env.REACT_APP_API}/api/uers`, {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -48,7 +48,7 @@ function SignUp({
         .then((response) => response.status)
         .then((status) => {
           if (status === 201) {
-            fetch("http://localhost:8080/login", {
+            fetch(`${process.env.REACT_APP_API}/login`, {
               method: "POST",
               body: JSON.stringify(data),
               headers: {

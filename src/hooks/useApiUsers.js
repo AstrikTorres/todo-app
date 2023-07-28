@@ -37,7 +37,7 @@ function useApiUsers() {
     setTodoCompleted,
   } = useTodos();
 
-  const URL_API = 'http://localhost:8080/api/';
+  const URL_API = `${process.env.REACT_APP_API}/api/`;
   
   const getAuth = useCallback(async () => {
     const response = await fetch(`${URL_API}users/auth`, {

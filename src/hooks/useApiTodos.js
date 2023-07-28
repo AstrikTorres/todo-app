@@ -1,7 +1,7 @@
 import React from 'react';
 
 function useApiTodos(token) {
-  const URL_API = 'http://localhost:8080/api/';
+  const URL_API = `${process.env.REACT_APP_API}/api/`;
 
   const [errorApiTodos, setErrorApiTodos] = React.useState(null);
   const [loadingApiTodos, setLoadingApiTodos] = React.useState(true);
