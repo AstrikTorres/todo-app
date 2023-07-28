@@ -1,5 +1,5 @@
 # To Do List - React App
 
-🌐 La aplicación ya se encuentra compilada y alojada junto al backend! ➡️ https://to-do-app-astrik.herokuapp.com/
+🌐 El front se encuentra compilado y alojado con github pages ➡️ https://astriktorres.github.io/todo-app/
 
-🌐 Repositorio de la Aplicación Full Stack: https://github.com/AstrikTorres/todo-app-api
+🌐 Repositorio del backend ➡️ https://github.com/AstrikTorres/todo-app-fullstack
