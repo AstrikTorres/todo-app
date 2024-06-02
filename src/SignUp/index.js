@@ -38,7 +38,7 @@ function SignUp({
 		}
 
     if (data.username.match(validUsername) && data.password.match(validPassword)) {
-      fetch(`${process.env.REACT_APP_API}/api/uers`, {
+      fetch(`${process.env.REACT_APP_API}/api/users`, {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
