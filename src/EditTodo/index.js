@@ -1,6 +1,6 @@
 import React from "react";
 
-function EditTodo({ setOpenModalEdit, todoValue, editTodo, verifyTodoDuplied, callApi, todoId, todoCompleted }) {
+function EditTodo({ setOpenModalEdit, todoValue, editTodo, verifyTodoDuplied, callApi, todoId, todoCompleted, isDemo }) {
   const [newTodoValue, setNewTodoValue] = React.useState('');
 
   const onOut = () => {
@@ -16,11 +16,13 @@ function EditTodo({ setOpenModalEdit, todoValue, editTodo, verifyTodoDuplied, ca
       document.getElementById('label').innerHTML = 'This todo already exists';
     } else {
       editTodo(todoValue, newTodoValue);
-      callApi('todos', 'PUT', {
-        id: todoId,
-        text: newTodoValue,
-        completed: todoCompleted
-      });
+      if (!isDemo) {
+        callApi('todos', 'PUT', {
+          id: todoId,
+          text: newTodoValue,
+          completed: todoCompleted
+        });
+      }
       onOut();
     }
   };

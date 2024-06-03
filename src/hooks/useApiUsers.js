@@ -89,6 +89,18 @@ function useApiUsers() {
       });
     }
   }, [isLoged]);
+  
+  const [isDemo, toggleDemo] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!isLoged && isDemo) {
+      saveToken("");
+      saveTodos([])
+      setLoadingApiUsers(false);
+      setOpenModalSignUp(false);
+      setOpenModalLogin(false);
+    }
+  }, [isDemo]);
 
   const [openModalSignUp, setOpenModalSignUp] = React.useState(false);
   const [openModalLogin, setOpenModalLogin] = React.useState(!isLoged);
@@ -134,6 +146,8 @@ function useApiUsers() {
     setTodoId,
     todoCompleted,
     setTodoCompleted,
+    isDemo,
+    toggleDemo,
   }
 
 }

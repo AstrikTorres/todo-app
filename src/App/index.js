@@ -60,6 +60,8 @@ function App() {
     setTodoId,
     todoCompleted,
     setTodoCompleted,
+    isDemo,
+    toggleDemo,
   } = useApiUsers();
   const {
     callApi,
@@ -78,6 +80,7 @@ function App() {
           setLoadingApiUsers(true);
           setOpenModalLogin(true);
         }}
+        isLoged={isLoged}
       />
 
       <TitleApp loading={(loading || loadingApiUsers)}>
@@ -100,6 +103,7 @@ function App() {
             saveToken={saveToken}
             setOpenModalSignUp={setOpenModalSignUp}
             setLoadingApiUsers={setLoadingApiUsers}
+            toggleDemo={toggleDemo}
           />
         </Modal>
       )}
@@ -111,6 +115,7 @@ function App() {
             saveIsLoged={saveIsLoged}
             saveToken={saveToken}
             setOpenModalLogin={setOpenModalLogin}
+            toggleDemo={toggleDemo}
           />
         </Modal>
       )}
@@ -123,7 +128,7 @@ function App() {
           ))
         }
         {(!loading && !loadingApiUsers && !totalTodos) && <EmptyTodos/>}
-        {(!loading && !loadingApiUsers && !error && !errorApiUsers && isLoged) &&
+        {(!loading && !loadingApiUsers && !error && !errorApiUsers && (isLoged || isDemo)) &&
           searchedTodos.map(todo => (
             <TodoItem
               completed={todo.completed}
@@ -136,11 +141,15 @@ function App() {
               setOpenModalEdit={setOpenModalEdit}
               onComplete={() => {
                 toggleCompleteTodo(todo.text);
-                callApi('todos', 'PUT', { ...todo, completed: todo.completed });
+                if (!isDemo) {
+                  callApi('todos', 'PUT', { ...todo, completed: todo.completed });
+                }
               }}
               onDelete={() => {
                 deleteTodo(todo.text); 
-                callApi(`todos/${todo.id}`, 'DELETE');
+                if (!isDemo) {
+                  callApi(`todos/${todo.id}`, 'DELETE');
+                }
               }}
             />
           ))
@@ -155,6 +164,7 @@ function App() {
             verifyTodoDuplied={verifyTodoDuplied}
             token={token}
             callApi={callApi}
+            isDemo={isDemo}
           />
         </Modal>
       )}
@@ -169,6 +179,7 @@ function App() {
             todoId={todoId}
             todoCompleted={todoCompleted}
             callApi={callApi}
+            isDemo={isDemo}
           />
         </Modal>
       )}
@@ -184,7 +195,9 @@ function App() {
         height="42px"
         deleteCompletedTodos={() => {
           deleteCompletedTodos();
-          callApi('todos/list', 'DELETE', completedTodosArr);
+          if (!isDemo) {
+            callApi('todos/list', 'DELETE', completedTodosArr);
+          }
         }}
       />
 

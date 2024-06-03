@@ -1,7 +1,7 @@
 import React from 'react';
 import './TodoForm.css';
 
-function TodoForm({ setOpenModal, addTodo, verifyTodoDuplied, callApi }) {
+function TodoForm({ setOpenModal, addTodo, verifyTodoDuplied, callApi, isDemo }) {
   const [newTodoValue, setNewTodoValue] = React.useState('');
 
   const onOut = () => {
@@ -15,7 +15,9 @@ function TodoForm({ setOpenModal, addTodo, verifyTodoDuplied, callApi }) {
     } else if (verifyTodoDuplied(newTodoValue)) {
       document.getElementById('label').innerHTML = 'This todo already exists';
     } else {
-      const data = await callApi('todos', 'POST', {text: newTodoValue, completed: false});
+      const data = isDemo
+        ? { text: newTodoValue, completed: false }
+        : await callApi('todos', 'POST', { text: newTodoValue, completed: false });
       addTodo(data);
       onOut();
     }

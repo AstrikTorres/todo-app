@@ -5,6 +5,7 @@ function SignUp({
   saveIsLoged,
   saveToken,
   setOpenModalLogin,
+  toggleDemo,
 }) {
 	// username must be at least 3 characters long and can contain only letters, numbers and underscores. The first character must be a letter.
 	const validUsername = /^[A-Za-z][A-Za-z0-9_.]{2,11}$/
@@ -115,6 +116,12 @@ function SignUp({
           className="form-button form-button-signup"
         >
           Login
+        </button>
+        <button
+          onClick={toggleDemo}
+          className="form-button form-button-signup"
+        >
+          Omitir
         </button>
       </div>
     </div>
